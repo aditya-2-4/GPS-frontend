@@ -1965,6 +1965,14 @@ body {
 
 /* Responsive adjustments (Mobile view transformation) */
 @media (max-width: 768px) {
+  .mobile-only-actions {
+    display: flex !important;
+  }
+  
+  .logout-container {
+    bottom: 80px !important;
+  }
+
   :root {
     --header-height: 0px; /* Header hidden on mobile */
     --bottom-nav-height: 60px;
