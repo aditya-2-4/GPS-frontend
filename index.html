@@ -633,14 +633,22 @@ void loop() {
       </div>
       <div class="esp-modal-body" style="padding: 24px;">
           <!-- Summary Cards -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 24px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 24px;">
              <div class="dashboard-card" style="padding: 20px; text-align: center; border-color: var(--color-risk); background: rgba(220, 38, 38, 0.05);">
                 <div style="font-size: 36px; font-weight: 800; color: var(--color-risk);" id="modal-total-risk">0</div>
-                <div style="font-size: 13px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; font-weight: 600;">Total Risk Zones</div>
+                <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; font-weight: 600;">Total Risk Zones</div>
              </div>
              <div class="dashboard-card" style="padding: 20px; text-align: center; border-color: var(--color-watch); background: rgba(217, 119, 6, 0.05);">
                 <div style="font-size: 36px; font-weight: 800; color: var(--color-watch);" id="modal-total-watch">0</div>
-                <div style="font-size: 13px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; font-weight: 600;">Total Watch Zones</div>
+                <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; font-weight: 600;">Total Watch Zones</div>
+             </div>
+             <div class="dashboard-card" style="padding: 20px; text-align: center; border-color: var(--color-primary); background: rgba(59, 130, 246, 0.05);">
+                <div style="font-size: 36px; font-weight: 800; color: var(--color-primary);" id="modal-avg-heat">0°</div>
+                <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; font-weight: 600;">Avg Heat Index</div>
+             </div>
+             <div class="dashboard-card" style="padding: 20px; text-align: center; border-color: #f472b6; background: rgba(244, 114, 182, 0.05);">
+                <div style="font-size: 36px; font-weight: 800; color: #f472b6;" id="modal-low-battery">0</div>
+                <div style="font-size: 12px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; font-weight: 600;">Low Battery Sensors</div>
              </div>
           </div>
           

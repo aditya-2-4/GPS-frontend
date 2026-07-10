@@ -1972,6 +1972,10 @@ body {
   .logout-container {
     bottom: 80px !important;
   }
+  
+  .analysis-btn-container {
+    bottom: 130px !important;
+  }
 
   :root {
     --header-height: 0px; /* Header hidden on mobile */

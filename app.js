@@ -925,11 +925,29 @@ function updateAppUI() {
   }
   
   // Analysis Panel updates
+  let totalHeat = 0;
+  let lowBatteryCount = 0;
+  
+  households.forEach(house => {
+     totalHeat += house.heat_index;
+     if (house.device_battery !== null && house.device_battery < 20) {
+         lowBatteryCount++;
+     }
+  });
+  
+  const avgHeatIndex = households.length > 0 ? (totalHeat / households.length).toFixed(1) : 0;
+
   const analysisRisk = document.getElementById("modal-total-risk");
   if (analysisRisk) analysisRisk.textContent = riskCount;
   
   const analysisWatch = document.getElementById("modal-total-watch");
   if (analysisWatch) analysisWatch.textContent = watchCount;
+  
+  const analysisAvgHeat = document.getElementById("modal-avg-heat");
+  if (analysisAvgHeat) analysisAvgHeat.textContent = `${avgHeatIndex}°C`;
+  
+  const analysisLowBat = document.getElementById("modal-low-battery");
+  if (analysisLowBat) analysisLowBat.textContent = lowBatteryCount;
   
   const todayBar = document.getElementById("modal-today-bar");
   if (todayBar) {
