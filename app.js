@@ -923,6 +923,24 @@ function updateAppUI() {
       <span class="count-item safe"><span class="bullet green"></span> ${safeCount} सुरक्षित (Safe)</span>
     `;
   }
+  
+  // Analysis Panel updates
+  const analysisRisk = document.getElementById("analysis-total-risk");
+  if (analysisRisk) analysisRisk.textContent = riskCount;
+  
+  const analysisWatch = document.getElementById("analysis-total-watch");
+  if (analysisWatch) analysisWatch.textContent = watchCount;
+  
+  const todayBar = document.getElementById("analysis-today-bar");
+  if (todayBar) {
+     const total = households.length || 1;
+     // Base height plus proportion of risk/watch zones to make it visually dynamic
+     const riskPercent = Math.min(((riskCount * 2 + watchCount) / (total * 2)) * 100 + 20, 100);
+     todayBar.style.height = `${riskPercent}%`;
+     if (riskPercent > 70) todayBar.style.background = "var(--color-risk)";
+     else if (riskPercent > 40) todayBar.style.background = "var(--color-watch)";
+     else todayBar.style.background = "var(--color-safe)";
+  }
 
   const bilingualStrip = document.getElementById("bilingual-summary-strip");
   if (bilingualStrip) {

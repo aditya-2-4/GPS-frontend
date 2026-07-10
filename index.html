@@ -465,6 +465,70 @@
         </div>
       </aside>
 
+      </aside>
+
+      <!-- Analysis Panel Screen (Analysis tab on mobile) -->
+      <aside class="sidebar analysis-sidebar mobile-view-panel hidden" id="analysis-panel">
+        <div class="settings-header">
+          <i data-lucide="bar-chart-2" class="card-icon blue"></i>
+          <h2>Data Analysis (डेटा विश्लेषण)</h2>
+        </div>
+        <p class="section-desc">Historical data, trends, and risk analysis across all monitored households.</p>
+        
+        <div class="settings-body" id="analysis-content" style="padding-top: 10px;">
+          <!-- Summary Cards -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+             <div class="dashboard-card" style="padding: 15px; text-align: center; border-color: var(--color-risk);">
+                <div style="font-size: 24px; font-weight: 800; color: var(--color-risk);" id="analysis-total-risk">0</div>
+                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px;">Risk Zones</div>
+             </div>
+             <div class="dashboard-card" style="padding: 15px; text-align: center; border-color: var(--color-watch);">
+                <div style="font-size: 24px; font-weight: 800; color: var(--color-watch);" id="analysis-total-watch">0</div>
+                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px;">Watch Zones</div>
+             </div>
+          </div>
+          
+          <div class="dashboard-card" style="margin-bottom: 15px;">
+             <div class="card-header">
+               <i data-lucide="history" class="card-icon blue"></i>
+               <h2>Previous Data (Last 7 Days)</h2>
+             </div>
+             <p class="section-desc">Aggregate historical risk score trends over the past week based on collected data.</p>
+             
+             <!-- Simple CSS Bar Chart -->
+             <div style="display: flex; align-items: flex-end; justify-content: space-between; height: 120px; padding: 10px 0; border-bottom: 1px solid var(--border-light); margin-bottom: 10px; gap: 6px;">
+               <div style="width: 14%; background: var(--color-safe); height: 30%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 1"></div>
+               <div style="width: 14%; background: var(--color-safe); height: 40%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 2"></div>
+               <div style="width: 14%; background: var(--color-watch); height: 60%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 3"></div>
+               <div style="width: 14%; background: var(--color-watch); height: 50%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 4"></div>
+               <div style="width: 14%; background: var(--color-risk); height: 80%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 5"></div>
+               <div style="width: 14%; background: var(--color-risk); height: 70%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 6"></div>
+               <div style="width: 14%; background: var(--color-risk); height: 90%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" id="analysis-today-bar" title="Today"></div>
+             </div>
+             <div style="display: flex; justify-content: space-between; font-size: 9px; color: var(--text-muted); text-transform: uppercase;">
+                <span>D-6</span><span>D-5</span><span>D-4</span><span>D-3</span><span>D-2</span><span>D-1</span><span>Today</span>
+             </div>
+          </div>
+          
+          <div class="dashboard-card">
+             <div class="card-header">
+               <i data-lucide="activity" class="card-icon blue"></i>
+               <h2>Recent Anomalies</h2>
+             </div>
+             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;" id="analysis-anomalies-list">
+                <!-- Dynamically populated or static placeholders -->
+                <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                   <div>
+                      <div style="font-size: 12px; font-weight: 600; color: #fff;">Heat Spike Detected</div>
+                      <div style="font-size: 10px; color: var(--text-secondary);">Ramesh Chandra (HI-IOT-101)</div>
+                   </div>
+                   <div style="font-size: 10px; color: var(--color-risk);">+15% Risk</div>
+                </div>
+             </div>
+          </div>
+        </div>
+      </aside>
+
     </main>
 
     <!-- Sliding Bottom Sheet: Households inside coverage range -->
@@ -522,6 +586,10 @@
       <button class="nav-item" data-tab="settings-panel">
         <i data-lucide="sliders"></i>
         <span>Settings</span>
+      </button>
+      <button class="nav-item" data-tab="analysis-panel">
+        <i data-lucide="bar-chart-2"></i>
+        <span>Analysis</span>
       </button>
     </nav>
     
