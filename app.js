@@ -925,13 +925,13 @@ function updateAppUI() {
   }
   
   // Analysis Panel updates
-  const analysisRisk = document.getElementById("analysis-total-risk");
+  const analysisRisk = document.getElementById("modal-total-risk");
   if (analysisRisk) analysisRisk.textContent = riskCount;
   
-  const analysisWatch = document.getElementById("analysis-total-watch");
+  const analysisWatch = document.getElementById("modal-total-watch");
   if (analysisWatch) analysisWatch.textContent = watchCount;
   
-  const todayBar = document.getElementById("analysis-today-bar");
+  const todayBar = document.getElementById("modal-today-bar");
   if (todayBar) {
      const total = households.length || 1;
      // Base height plus proportion of risk/watch zones to make it visually dynamic

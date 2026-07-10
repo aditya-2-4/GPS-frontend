@@ -465,70 +465,6 @@
         </div>
       </aside>
 
-      </aside>
-
-      <!-- Analysis Panel Screen (Analysis tab on mobile) -->
-      <aside class="sidebar analysis-sidebar mobile-view-panel hidden" id="analysis-panel">
-        <div class="settings-header">
-          <i data-lucide="bar-chart-2" class="card-icon blue"></i>
-          <h2>Data Analysis (डेटा विश्लेषण)</h2>
-        </div>
-        <p class="section-desc">Historical data, trends, and risk analysis across all monitored households.</p>
-        
-        <div class="settings-body" id="analysis-content" style="padding-top: 10px;">
-          <!-- Summary Cards -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-             <div class="dashboard-card" style="padding: 15px; text-align: center; border-color: var(--color-risk);">
-                <div style="font-size: 24px; font-weight: 800; color: var(--color-risk);" id="analysis-total-risk">0</div>
-                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px;">Risk Zones</div>
-             </div>
-             <div class="dashboard-card" style="padding: 15px; text-align: center; border-color: var(--color-watch);">
-                <div style="font-size: 24px; font-weight: 800; color: var(--color-watch);" id="analysis-total-watch">0</div>
-                <div style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px;">Watch Zones</div>
-             </div>
-          </div>
-          
-          <div class="dashboard-card" style="margin-bottom: 15px;">
-             <div class="card-header">
-               <i data-lucide="history" class="card-icon blue"></i>
-               <h2>Previous Data (Last 7 Days)</h2>
-             </div>
-             <p class="section-desc">Aggregate historical risk score trends over the past week based on collected data.</p>
-             
-             <!-- Simple CSS Bar Chart -->
-             <div style="display: flex; align-items: flex-end; justify-content: space-between; height: 120px; padding: 10px 0; border-bottom: 1px solid var(--border-light); margin-bottom: 10px; gap: 6px;">
-               <div style="width: 14%; background: var(--color-safe); height: 30%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 1"></div>
-               <div style="width: 14%; background: var(--color-safe); height: 40%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 2"></div>
-               <div style="width: 14%; background: var(--color-watch); height: 60%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 3"></div>
-               <div style="width: 14%; background: var(--color-watch); height: 50%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 4"></div>
-               <div style="width: 14%; background: var(--color-risk); height: 80%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 5"></div>
-               <div style="width: 14%; background: var(--color-risk); height: 70%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" title="Day 6"></div>
-               <div style="width: 14%; background: var(--color-risk); height: 90%; border-radius: 4px 4px 0 0; transition: height 0.5s ease;" id="analysis-today-bar" title="Today"></div>
-             </div>
-             <div style="display: flex; justify-content: space-between; font-size: 9px; color: var(--text-muted); text-transform: uppercase;">
-                <span>D-6</span><span>D-5</span><span>D-4</span><span>D-3</span><span>D-2</span><span>D-1</span><span>Today</span>
-             </div>
-          </div>
-          
-          <div class="dashboard-card">
-             <div class="card-header">
-               <i data-lucide="activity" class="card-icon blue"></i>
-               <h2>Recent Anomalies</h2>
-             </div>
-             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;" id="analysis-anomalies-list">
-                <!-- Dynamically populated or static placeholders -->
-                <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 8px;">
-                   <div>
-                      <div style="font-size: 12px; font-weight: 600; color: #fff;">Heat Spike Detected</div>
-                      <div style="font-size: 10px; color: var(--text-secondary);">Ramesh Chandra (HI-IOT-101)</div>
-                   </div>
-                   <div style="font-size: 10px; color: var(--color-risk);">+15% Risk</div>
-                </div>
-             </div>
-          </div>
-        </div>
-      </aside>
-
     </main>
 
     <!-- Sliding Bottom Sheet: Households inside coverage range -->
@@ -586,10 +522,6 @@
       <button class="nav-item" data-tab="settings-panel">
         <i data-lucide="sliders"></i>
         <span>Settings</span>
-      </button>
-      <button class="nav-item" data-tab="analysis-panel">
-        <i data-lucide="bar-chart-2"></i>
-        <span>Analysis</span>
       </button>
     </nav>
     
@@ -692,20 +624,81 @@ void loop() {
     </div>
   </div>
 
+  <!-- Analysis Modal -->
+  <div class="esp-modal-overlay" id="analysis-modal">
+    <div class="esp-modal" style="max-width: 800px;">
+      <div class="esp-modal-header" style="background: rgba(139, 92, 246, 0.15);">
+        <h2><i data-lucide="bar-chart-2"></i> Historical Data Analysis</h2>
+        <button class="esp-modal-close" id="close-analysis-modal"><i data-lucide="x"></i></button>
+      </div>
+      <div class="esp-modal-body" style="padding: 24px;">
+          <!-- Summary Cards -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 24px;">
+             <div class="dashboard-card" style="padding: 20px; text-align: center; border-color: var(--color-risk); background: rgba(220, 38, 38, 0.05);">
+                <div style="font-size: 36px; font-weight: 800; color: var(--color-risk);" id="modal-total-risk">0</div>
+                <div style="font-size: 13px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; font-weight: 600;">Total Risk Zones</div>
+             </div>
+             <div class="dashboard-card" style="padding: 20px; text-align: center; border-color: var(--color-watch); background: rgba(217, 119, 6, 0.05);">
+                <div style="font-size: 36px; font-weight: 800; color: var(--color-watch);" id="modal-total-watch">0</div>
+                <div style="font-size: 13px; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; font-weight: 600;">Total Watch Zones</div>
+             </div>
+          </div>
+          
+          <div class="dashboard-card" style="margin-bottom: 15px;">
+             <div class="card-header">
+               <i data-lucide="history" class="card-icon blue"></i>
+               <h2>Previous 7-Day Trend (Aggregated)</h2>
+             </div>
+             <p class="section-desc" style="margin-bottom: 20px;">Daily risk levels and alerts generated across all registered households in your ward.</p>
+             
+             <!-- Simple CSS Bar Chart -->
+             <div style="display: flex; align-items: flex-end; justify-content: space-between; height: 160px; padding: 10px 0 0 0; border-bottom: 1px solid var(--border-light); margin-bottom: 12px; gap: 12px;">
+               <div style="flex: 1; background: var(--color-safe); height: 35%; border-radius: 6px 6px 0 0;" title="Day 1"></div>
+               <div style="flex: 1; background: var(--color-safe); height: 45%; border-radius: 6px 6px 0 0;" title="Day 2"></div>
+               <div style="flex: 1; background: var(--color-watch); height: 60%; border-radius: 6px 6px 0 0;" title="Day 3"></div>
+               <div style="flex: 1; background: var(--color-watch); height: 50%; border-radius: 6px 6px 0 0;" title="Day 4"></div>
+               <div style="flex: 1; background: var(--color-risk); height: 85%; border-radius: 6px 6px 0 0;" title="Day 5"></div>
+               <div style="flex: 1; background: var(--color-risk); height: 75%; border-radius: 6px 6px 0 0;" title="Day 6"></div>
+               <div style="flex: 1; background: var(--color-risk); height: 90%; border-radius: 6px 6px 0 0; transition: height 0.5s ease;" id="modal-today-bar" title="Today"></div>
+             </div>
+             <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">
+                <span style="flex: 1; text-align: center;">D-6</span>
+                <span style="flex: 1; text-align: center;">D-5</span>
+                <span style="flex: 1; text-align: center;">D-4</span>
+                <span style="flex: 1; text-align: center;">D-3</span>
+                <span style="flex: 1; text-align: center;">D-2</span>
+                <span style="flex: 1; text-align: center;">D-1</span>
+                <span style="flex: 1; text-align: center; color: var(--color-primary);">Today</span>
+             </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const modal = document.getElementById('esp-modal');
+      const analysisModal = document.getElementById('analysis-modal');
       const openBtn = document.getElementById('esp32-setup-btn');
       const mobileOpenBtn = document.getElementById('mobile-esp32-setup-btn');
+      const openAnalysisBtn = document.getElementById('open-analysis-modal-btn');
+      
       const closeBtn = document.getElementById('close-esp-modal');
+      const closeAnalysisBtn = document.getElementById('close-analysis-modal');
       const copyBtn = document.getElementById('copy-esp-code');
       
       openBtn?.addEventListener('click', () => modal.style.display = 'flex');
       mobileOpenBtn?.addEventListener('click', () => modal.style.display = 'flex');
       closeBtn?.addEventListener('click', () => modal.style.display = 'none');
       
+      openAnalysisBtn?.addEventListener('click', () => analysisModal.style.display = 'flex');
+      closeAnalysisBtn?.addEventListener('click', () => analysisModal.style.display = 'none');
+      
       modal?.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
+      });
+      analysisModal?.addEventListener('click', (e) => {
+        if (e.target === analysisModal) analysisModal.style.display = 'none';
       });
 
       copyBtn.addEventListener('click', () => {
@@ -723,6 +716,13 @@ void loop() {
     <button id="admin-logout-btn" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); padding: 8px 14px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 500; backdrop-filter: blur(8px); transition: all 0.3s ease;">
       <i data-lucide="log-out" style="width: 14px; height: 14px;"></i>
       Admin - Log Out
+    </button>
+  </div>
+  
+  <div class="analysis-btn-container" style="position: fixed; bottom: 70px; left: 20px; z-index: 1000;">
+    <button id="open-analysis-modal-btn" class="primary-btn" style="background: linear-gradient(135deg, var(--color-accent), #6d28d9); border: 1px solid #a78bfa; color: white; padding: 10px 18px; border-radius: 30px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4); font-size: 14px;">
+      <i data-lucide="bar-chart-2" style="width: 16px; height: 16px;"></i>
+      View Data Analysis
     </button>
   </div>
   <script>
